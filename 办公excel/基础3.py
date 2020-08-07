@@ -1,0 +1,21 @@
+import openpyxl
+wb=openpyxl.Workbook()
+ws1=wb.create_sheet(title="小鸡")
+ws2=wb.create_sheet(title='大公司')
+ws3=wb.create_sheet(title='花港饭店')
+ws4=wb.create_sheet(title='尔特')
+#设置工作表标签颜色
+ws1.sheet_properties.tabColor='FF0000'
+ws2.sheet_properties.tabColor='00FF00'
+ws3.sheet_properties.tabColor='0000FF'
+ws4.sheet_properties.tabColor='8B0088'
+#设置宽,高
+ws2.row_dimensions[2].height=100
+ws2.column_dimensions['C'].width=50
+#合并单元格
+ws1.merge_cells('A1:C3')
+ws1['A1']='sfdagsadgssg'
+#拆分单元格
+ws1.unmerge_cells('A1:C3')
+#保存文件
+wb.save(r"C:\Users\Administrator\Desktop\2.xlsx")

@@ -1,0 +1,25 @@
+# -*- encoding:utf-8 -*-
+
+class DownloadStrategy(object):
+    '''
+    Base class for download stragetys.
+    '''
+    pass
+
+class FromDuxiuRemote(DownloadStrategy):
+    '''
+    download from duxiu remote url.
+    '''
+    pass
+
+class FromDuxiuLocal(DownloadStrategy):
+    '''
+    download from duxiu local file.
+    '''
+    pass
+
+class FromChaoxing(DownloadStrategy):
+    '''
+    download from chaoxing localfile.
+    '''
+    pass

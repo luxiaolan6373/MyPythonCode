@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: downloadduxiu
+Version: 0.9
+Summary: download images from duxiu and chaoxing library
+Home-page: https://bitbucket.org/luoboiqingcai/downloadduxiu/
+Author: Shi Feng
+Author-email: sf.cumt@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Requires: requests
