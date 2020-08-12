@@ -33,11 +33,9 @@ class KaZuList():
 
         self.tree.heading('评级',text='评级')#显示表头
         self.tree.heading('标题', text='标题(官方卡组)')  # 显示表头
-        i=0
         for item in self.list:
             #插入
             self.tree.insert('',END,text=item['line_id'],values=(item['quality'],item['line_name']))
-            i+=1
         #绑定
         self.scrollbar.config(command=self.tree.yview)
         self.tree.pack()
