@@ -24,7 +24,7 @@ class GameDown():
             t = str(item)
             if "微端下载" not in t:  # 排除恶心的广告
                 d = dict.fromkeys(('name', 'img', 'url', 'type', 'label', 'language', 'score', 'date', 'platform'))
-                d['img'] = item.div.a.img  # 图片
+                d['img'] = item.div.a.img['src']  # 图片
                 s = bs4.BeautifulSoup(t, "html.parser")
                 s = s.find('div', "text")
                 d['name'] = s.div.a.text  # 名称
@@ -56,7 +56,7 @@ class GameDown():
         except:
             urls['xunlei'] = "暂无资源"
         try:
-            urls['baidu'] = s[0]['href'] + s[0].text.replace("网盘下载", "")
+            urls['baidu'] = s[0]['href'] + s[0].text.replace("网盘下载", "").replace("种子下载", "")
         except:
             urls['baidu'] = "暂无资源"
         try:
