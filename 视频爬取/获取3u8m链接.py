@@ -65,9 +65,9 @@ class BaoYu():
             print('get_zipai_urls访问失败,请检查网址或者网络')
             return -1
     def get_play_3u8m_url(self, urls):  # 下载主过程
-        # print('当前子线程: {}'.format(threading.current_thread().name))
         url = urls['url']
         playurl = self.get_data_url(self.url + url)
+
         title = urls['title']
         title = title.replace(" ", "_")
         url_m3u8 = self.playurl + f'{playurl}/360p/360p.m3u8'
@@ -93,6 +93,7 @@ class BaoYu():
         pool_sema.release()
 
     def get_data_url(self,url):
+
         try:
             res = requests.get(url, headers=self.headers)
             soup = bs4.BeautifulSoup(res.text, "html.parser")
@@ -102,9 +103,12 @@ class BaoYu():
             soup = soup.split('</script>')[0]
             j = json.loads(soup)
 
+
+
             t=str(j['url']).split('/index.m3u8')[0]
             return t
         except:
+
             print("get_data_url访问出错,请检查!")
             return '-1'
     def find_url_is_ture(self,url):  # 判断是否是在完成的库中
@@ -127,17 +131,19 @@ class MyThread(threading.Thread):
         self.func(self.args[0])
 def main():
     #这里设置好条件-------------
-    url="https://www.byjj222jzdou077fulc1r8.fun:52789/"
+
+    url="https://www.by46zo69p6lch97g7xp42utrl5p.pw:52789"
     playurl='https://z.weilekangnet.com:59666/'
-    path=f'D:\\baoyu\\dongman\\'
+    path='D:\\baoyu\\zipai\\'
     okpath=r'D:\baoyu\完成列表.ini'
     by = BaoYu(url,playurl,path,okpath)
     # 有几个栏目
     urls = by.get_web(url)
     # 读取urls[1]['url'] 栏目 有多少页
-    l = 4 # 栏目 0开始   返回一页的所有视频3m8u链接
+    l = 1 # 栏目 0开始   返回一页的所有视频3m8u链接
     num_pages = by.get_num_pages(urls[l]['url'])
-    for i in range(num_pages):
+
+    for i in range(2):
         print('-------------------------正在爬取%s的第%d页-------------------------'%(urls[l]['title'],i+1))
         play_urls = by.get_zipai_urls(urls[l]['url'], i)
         for item in play_urls:
@@ -145,6 +151,7 @@ def main():
             t=MyThread(by.get_play_3u8m_url, args=(item,))
             t.setDaemon(True)
             t.start()
+
 if __name__ == '__main__':
     #限制线程数量
     pool_sema = threading.BoundedSemaphore(50)

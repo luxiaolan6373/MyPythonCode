@@ -160,6 +160,10 @@ class GameUI():
         tk_image = ImageTk.PhotoImage(pil_image)
         return tk_image
 if __name__ == "__main__":
+    # 限制线程数量
+    pool_sema = threading.BoundedSemaphore(50)
+    # 创建互斥体
+    mutex = threading.Lock()
     ui = GameUI()
     games = []
     ui.londlist()
