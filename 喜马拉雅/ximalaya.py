@@ -47,7 +47,7 @@ class Ximalaya():
             js1 = json.loads(res.text)
             js1 = js1['data']['tracks']
             for item in js1:
-                d = dict.fromkeys(('title', 'url', 'playCount'))
+                d = dict.fromkeys(('title', 'trackId', 'playCount'))
                 d["title"] = item['title']  # 标题
                 d["playCount"] = item['playCount']  # 播放量
                 d["trackId"] = item['trackId']  # 下载接口id
@@ -55,6 +55,7 @@ class Ximalaya():
         return ls
 
     # 下载音频文件,返回下载结果 需要提供章节字典 和目录名
+
     def donwn(self, section, sname):
         try:
             # 如果没有这个目录则创建一个目录
@@ -70,7 +71,7 @@ class Ximalaya():
             print(section['title'] + " 下载成功!")
         except:
             print(section['title'] + " 下载失败!")
-        print('全部下载完成!')
+
 
     #将数据保存到excel表格中
     def to_excel(self, sections, sname):
@@ -100,42 +101,50 @@ class Ximalaya():
 
 
 if __name__ == "__main__":
-    xmly = Ximalaya()
     while True:
-        try:
-            kw = input("请输入您想搜索的关键字:(书名或者作者)\r\n")
-            ls = xmly.search(kw)
-            for i, item in enumerate(ls):
-                txt = f"{i + 1}-{item['title']}-{item['count']}"
-                print(txt)
-            xh = input(f"请输入您想要下载的专辑的序号:1-{len(ls)}  返回上一步请输入'#'键\r\n")
-            # 如果输入了#号键则继续循环问..不是则跳出循环
-            if xh != '#':
-                try:
-                    xh = int(xh) - 1
-                    break
-                except:
-                    print("输入有误!回到开始位置")
+        xmly = Ximalaya()
+        while True:
+            try:
+                kw = input("请输入您想搜索的关键字:(书名或者作者)\r\n")
+                ls = xmly.search(kw)
+                for i, item in enumerate(ls):
+                    txt = f"{i + 1}-{item['title']}-{item['count']}"
+                    print(txt)
+                xh = input(f"请输入您想要下载的专辑的序号:1-{len(ls)}  返回上一步请输入'#'键\r\n")
+                # 如果输入了#号键则继续循环问..不是则跳出循环
+                if xh != '#':
+                    try:
+                        xh = int(xh) - 1
+                        break
+                    except:
+                        print("输入有误!回到开始位置")
 
-        except:
-            print("关键字有误,或者没找到!")
-    print("正在遍历所有的章节,这需要些时间.......")
-    # 根据用户选的序号来选择遍历哪个有声书的所有章节
-    sections = xmly.get_album(ls[xh]["albumId"])
-    for i, item in enumerate(sections):
-        print(i + 1, item['title'])
-    ts = input(
-        f"1.请输入需要下载的章节序号:1-{len(sections)} 支持范围下载 例如输入:10-100\r\n2.如果您要全部都下载,请输入'#'键\r\n3.如果您要全部打印到excel表格里请输入'e'键\r\n")
-    name = ls[xh]["title"]
-    if ts == "#":  # 全部下载
-        for item in sections:
-            xmly.donwn(item, name)
-    else:
-        if '-' in ts:  # 范围下载
-            min, max = ts.split('-')
-            for i in range(int(min), int(max) + 1):
-                xmly.donwn(sections[i], name)
-        elif ts == 'e':  # 将数据保存到excel表格里
-            xmly.to_excel(sections, name)
-        else:  # 按序号下载
-            xmly.donwn(sections[int(ts) - 1], name)
+            except:
+                print("关键字有误,或者没找到!")
+        print("正在遍历所有的章节,这需要些时间.......")
+        # 根据用户选的序号来选择遍历哪个有声书的所有章节
+        sections = xmly.get_album(ls[xh]["albumId"])
+        for i, item in enumerate(sections):
+            print(i + 1, item['title'])
+        ts = input(
+            f"           有几种交互方式,请参考!\r\n1.请输入需要下载的章节序号:1-{len(sections)} 支持范围下载 例如输入:10-100\r\n2.如果您要全部都下载,请输入'#'键\r\n3.如果您要全部打印到excel表格里请输入'e'键\r\n4.退出按x键\r\n")
+        name = ls[xh]["title"]
+        if ts == "#":  # 全部下载
+            for item in sections:
+                xmly.donwn(item, name)
+        else:
+            if '-' in ts:  # 范围下载
+                min, max = ts.split('-')
+                for i in range(int(min), int(max) + 1):
+                    xmly.donwn(sections[i], name)
+            elif ts == 'e':  # 将数据保存到excel表格里
+                xmly.to_excel(sections, name)
+            elif ts=='x':
+                break
+            else:  # 按序号下载
+                xmly.donwn(sections[int(ts) - 1], name)
+        ts=input("还要继续输入'j'键,退出输入任意键")
+        if ts!='j':
+            break
+
+
