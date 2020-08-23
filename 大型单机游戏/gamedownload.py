@@ -51,8 +51,13 @@ class GameDown():
         soup = bs4.BeautifulSoup(res.text, "html.parser")
         urls = dict.fromkeys(('xunlei', "baidu", "zhongzi"))
         s = soup.find_all("a", "gameDown down_bd")
+
         try:
-            urls['xunlei'] = res.text.split("url: '")[-1].split("'")[0]
+            xunlei=res.text.split("url: '")[-1].split("'")[0]
+            if "thunder" in xunlei:
+                urls['xunlei'] = xunlei
+            else:
+                urls['xunlei'] = "暂无资源"
         except:
             urls['xunlei'] = "暂无资源"
         try:

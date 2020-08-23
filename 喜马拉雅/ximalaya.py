@@ -128,7 +128,7 @@ if __name__ == "__main__":
             print(i + 1, item['title'])
         ts = input(
             f"           有几种交互方式,请参考!\r\n1.请输入需要下载的章节序号:1-{len(sections)} 支持范围下载 例如输入:10-100\r\n2.如果您要全部都下载,请输入'#'键\r\n3.如果您要全部打印到excel表格里请输入'e'键\r\n4.退出按x键\r\n")
-        name = ls[xh]["title"]
+        name = "D:\喜马拉雅音频文件\\"+ls[xh]["title"]
         if ts == "#":  # 全部下载
             for item in sections:
                 xmly.donwn(item, name)
