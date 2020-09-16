@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>这是我第一个写的web网页测试</title>
+        <style type="text/css">
+            .ulclass li:nth-child(n){
+                float:left;
+                display:inline;
+            }
+            .ulclass li:nth-child(5n+1){
+                clear:both
+            }
+        </style>
+
+    </head>
+    <body>
+        {% for i in title_list %}
+         <a href="/{{ i['url'] }}">{{ i['title'] }}</a>
+        {% endfor %}
+        <ul class="ulclass">
+            {% for i in play_urls %}
+
+            <li>
+                <div style=" width:248px; height:206px;"><img src="{{ i['pic'] }}"><a href="/{{ i['url'] }}"></a></div>
+                <div style=" width:248px; height:40px;"><a href="/play?url={{ i['url'] }}&title={{ i['title'] }}">{{ i['title'] }}</a></div>
+                </li>
+            {% endfor %}
+        </ul>
+
+
+
+
+    </body>
+</html>

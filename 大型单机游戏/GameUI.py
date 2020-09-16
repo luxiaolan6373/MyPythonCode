@@ -26,8 +26,8 @@ class GameUI():
         curItem = self.tree.focus()
         line_id = int(self.tree.item(curItem)['text'])
         global games, gd
-        print(games[line_id]['url'])
-        downs = gd.get_games_Down_Url(games[line_id]['url'])
+        print(games[line_id]['id'])
+        downs = gd.get_games_Down_Url(games[line_id]['id'])
         print(downs['xunlei'])
         self.var_xunlei.set(downs['xunlei'])
         self.var_baidu.set(downs['baidu'])
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     games = []
     ui.londlist()
     yema = 1
-    gd = GameDown(1)
+    gd = GameDown(1,'hot')
     num = gd.get_num()
     ye = gd.get_ye()
     gs = gd.get_games()

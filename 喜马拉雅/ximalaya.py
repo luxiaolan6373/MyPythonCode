@@ -1,15 +1,15 @@
-import requests
-import bs4
+import requests#没有就pip install requests
+import bs4 #没有就pip install beautifulsoup4
 import json
 import os
 import openpyxl
-
 
 class Ximalaya():
     def __init__(self):
         self.url = 'https://www.ximalaya.com'
         self.headers = {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"}
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
+        'cookies':'这里填'}
 
     # 关键字搜索,返回一个列表 的字典数据
     def search(self, kw):

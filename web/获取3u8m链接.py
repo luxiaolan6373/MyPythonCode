@@ -70,7 +70,7 @@ class BaoYu():
 
         title = urls['title']
         title = title.replace(" ", "_")
-        url_m3u8 = self.playurl + f'{playurl}/play.m3u8'
+        url_m3u8 = self.playurl + f'{playurl}/480p/480p.m3u8'
         videoName = url_m3u8.split('/')[-3]
         path = self.path + title
         print(videoName)
@@ -132,7 +132,7 @@ class MyThread(threading.Thread):
 def main():
     #这里设置好条件-------------
 
-    url="https://www.byg6f64ipa4gk655rvap8zw84u.xyz:52789"
+    url="https://www.by46zo69p6lch97g7xp42utrl5p.pw:52789"
     playurl='https://z.weilekangnet.com:59666'
     path='D:\\baoyu\\zipai\\'
     okpath=r'D:\baoyu\完成列表.ini'
@@ -141,7 +141,8 @@ def main():
     urls = by.get_web(url)
     print(urls)
     # 读取urls[1]['url'] 栏目 有多少页
-    l = 0 # 栏目 0开始   返回一页的所有视频3m8u链接
+    '''
+    l = 1 # 栏目 0开始   返回一页的所有视频3m8u链接
     num_pages = by.get_num_pages(urls[l]['url'])
 
     for i in range(2):
@@ -153,11 +154,18 @@ def main():
             t.setDaemon(True)
             t.start()
 
-
+    '''
 
 if __name__ == '__main__':
     #限制线程数量
     pool_sema = threading.BoundedSemaphore(50)
     #创建互斥体
     mutex = threading.Lock()
+    # que = queue.Queue()
+    # by = BaoYu()
+    # 有几个栏目
+    # rls = by.get_web("https://www.byjj222jzdou077fulc1r8.fun:52789//")
+    # by.get_num_pages(urls[1]['url'])
+    # by.get_play_3u8m_url(play_urls[2])
+
     main()
